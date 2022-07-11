@@ -6,7 +6,7 @@ export enum destination {
 }
 
 export interface iUser {
-    _id?: string;
+    id?: string;
     name: string;
     email: string;
     password: string;
@@ -15,7 +15,7 @@ export interface iUser {
 
 export interface iSuitcase {
     id?: string;
-    destination: destination;
+    destination?: destination;
     owner: string;
     items?: [
         {
@@ -30,5 +30,5 @@ export interface iItem {
     id?: string;
     name: string;
     weight: number;
-    destination: destination;
+    destination?: destination;
 }
