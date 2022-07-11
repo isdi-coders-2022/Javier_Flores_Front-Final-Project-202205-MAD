@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { iUser } from '../interfaces/interfaces';
-import { userReducer } from '../reducers/users.reducer/action.reducer';
+import { userReducer } from '../reducers/users.reducer/user.reducer';
 
 export interface iStore {
     user: Array<iUser>;
