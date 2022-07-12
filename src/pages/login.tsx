@@ -1,7 +1,7 @@
 export function Login() {
     return (
         <div className="Login">
-            <div className="logo100"></div>
+            <div className="logo100">Logo</div>
             <form>
                 <div className="input-container">
                     <label>Username </label>
