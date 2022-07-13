@@ -1,7 +1,7 @@
-import { userWithToken } from '../../interfaces/interfaces';
+import { iUserLogged } from '../../interfaces/interfaces';
 
 export class LocalStorage {
-    constructor(public item: userWithToken) {}
+    constructor(public item: iUserLogged) {}
 
     setItem() {
         localStorage.setItem('login', JSON.stringify(this.item));

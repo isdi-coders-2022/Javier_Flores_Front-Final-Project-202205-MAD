@@ -3,69 +3,62 @@ import { SyntheticEvent, useState } from 'react';
 // import { Link, useNavigate } from 'react-router-dom';
 import { UsersRepository } from '../../services/repository/repository.users';
 import { loadUserAction } from '../../reducers/users.reducer/action.creator';
+// import { LocalStorage } from '../../services/localStorage/localStorage';
+import { iUserLogged } from '../../interfaces/interfaces';
 
 export function FormLogin() {
-    // let navigate = useNavigate();
-
-    const dispatch = useDispatch();
-
+    const dispatcher = useDispatch();
     const [formData, setFormData] = useState({
-        token: '',
-        user: { id: '', name: '', email: '', password: '', suitcases: [] },
+        name: '',
+        password: '',
     });
+
+    async function handleSubmit(ev: SyntheticEvent) {
+        ev.preventDefault();
+        const loginUser: iUserLogged = await new UsersRepository().loginUser(
+            formData
+        );
+        console.log(loginUser);
+        if (loginUser.token) {
+            dispatcher(loadUserAction(loginUser));
+            localStorage.setItem('token', loginUser.token);
+            // navegate('/');
+        }
+    }
 
     function handleChange(ev: SyntheticEvent) {
         const element = ev.target as HTMLFormElement;
-        setFormData({
-            token: '',
-            user: { ...formData.user, [element.name]: element.value },
-        });
+        setFormData({ ...formData, [element.name]: element.value });
     }
-
-    const handleSubmit = async (ev: SyntheticEvent) => {
-        ev.preventDefault();
-        const response = await new UsersRepository().loginUser(formData.user);
-        console.log(response);
-
-        if (response.token) {
-            console.log(setFormData, 'AYYYYYYYYYYYYYYYYYYY');
-            dispatch(loadUserAction(response));
-            localStorage.setItem('user', JSON.stringify(response));
-            // navigate('/Creator');
-        }
-    };
-    let template = (
-        <form onSubmit={handleSubmit}>
-            <header className="form__header">
-                <p className="form__information">
-                    Enter your user name and your password
-                </p>
-            </header>
-            <div className="form__item">
+    const template = (
+        <>
+            <form onSubmit={handleSubmit}>
+                <p className="form__input">Name</p>
                 <input
+                    className="input"
                     type="text"
-                    className="form__input"
-                    placeholder="name"
-                    aria-label="name"
-                    autoFocus
-                    required
+                    name="name"
+                    value={formData.name}
                     onChange={handleChange}
+                    required
                 />
-            </div>
-            <div className="form__item">
+                <p className="form__input">Password</p>
                 <input
+                    className="input"
                     type="password"
-                    className="form__input"
-                    placeholder="Password"
-                    aria-label="Password"
-                    required
+                    name="password"
+                    value={formData.password}
                     onChange={handleChange}
+                    required
                 />
-            </div>
-            <button type="submit" className="form__submit">
-                Login
-            </button>
-        </form>
+                <div>
+                    <button className="button__login" type="submit">
+                        Enter
+                    </button>
+                </div>
+            </form>
+        </>
     );
     return template;
 }
+export default FormLogin;

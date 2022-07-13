@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { iUser, userWithToken } from '../interfaces/interfaces';
+import { iUserLogged } from '../interfaces/interfaces';
 import { userReducer } from '../reducers/users.reducer/user.reducer';
 
 export interface iStore {
-    user: userWithToken;
+    user: iUserLogged;
 }
 
 export const preloadedState: iStore = {
-    user: {} as userWithToken,
+    user: {} as iUserLogged,
 };
 
 export const store = configureStore({
