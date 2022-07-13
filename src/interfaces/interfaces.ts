@@ -17,6 +17,7 @@ export interface iUser {
 
 export interface iSuitcase {
     id?: string;
+    limitWeight: number;
     destination?: destination;
     owner: string;
     items?: [

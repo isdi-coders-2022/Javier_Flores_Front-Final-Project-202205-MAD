@@ -1,16 +1,18 @@
 import { suitcaseReducer } from './suitcase.reducer';
 import * as actions from './action.creator';
 import { AnyAction } from '@reduxjs/toolkit';
-import { destination, iSuitcase } from '../../interfaces/interfaces';
+import { iSuitcase } from '../../interfaces/interfaces';
 
 const mockedArray: Array<iSuitcase> = [
     {
         id: '1',
+        limitWeight: 1,
         owner: '1',
         isWeightOk: false,
     },
     {
         id: '2',
+        limitWeight: 2,
         owner: '2',
         isWeightOk: false,
     },
