@@ -1,15 +1,19 @@
 import axios from 'axios';
-import { iUser } from '../../interfaces/interfaces';
+import { iUser, userWithToken } from '../../interfaces/interfaces';
+export class UsersRepository {
+    url: string;
+    constructor() {
+        this.url = 'http://localhost:3900/user/';
+    }
 
-const url = 'http://localhost:3900/user/';
+    registerUser(user: iUser): Promise<iUser> {
+        return axios.post(this.url, user);
+    }
+    loginUser(user: Partial<iUser>): Promise<userWithToken> {
+        return axios.post(this.url + 'login', user);
+    }
 
-export function registerUser(user: iUser): Promise<iUser> {
-    return axios.post(url, user);
-}
-export function loginUser(user: Partial<iUser>): Promise<iUser> {
-    return axios.post(url + 'login', user);
-}
-
-export function deleteUser(id: iUser['id']) {
-    return axios.delete(url + id);
+    deleteUser(id: iUser['id']) {
+        return axios.delete(this.url + id);
+    }
 }

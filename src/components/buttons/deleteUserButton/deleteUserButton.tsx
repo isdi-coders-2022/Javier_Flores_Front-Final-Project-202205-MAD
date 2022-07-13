@@ -1,3 +1,3 @@
-export function LogoutButton() {
-    return <button className="LogoutButton">Logout</button>;
+export function DeleteUserButton() {
+    return <button className="deleteUserButton">Delete account</button>;
 }

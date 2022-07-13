@@ -1,3 +1,7 @@
+import { DeleteUserButton } from '../buttons/deleteUserButton/deleteUserButton';
+import { ListSuitcasesButton } from '../buttons/listSuitcasesButton/listSuitcasesButton';
+import { LogoutButton } from '../buttons/logoutButton/logoutButton';
+
 export function UserMenu() {
     return (
         <div className="UserMenu">

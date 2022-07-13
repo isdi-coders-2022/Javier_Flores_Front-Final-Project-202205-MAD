@@ -1,13 +1,18 @@
+import { userWithToken } from '../../interfaces/interfaces';
+
 export class LocalStorage {
-    public static get(key: string): string {
-        return localStorage.(key);
+    constructor(public item: userWithToken) {}
+
+    setItem() {
+        localStorage.setItem('login', JSON.stringify(this.item));
     }
-    
-    public static set(key: string, value: string): void {
-        localStorage.setItem(key, value);
+
+    getItem() {
+        const item = JSON.parse(localStorage.getItem('login') as string);
+        return item;
     }
-    
-    public static remove(key: string): void {
-        localStorage.removeItem(key);
+
+    removeItem() {
+        localStorage.removeItem('login');
     }
-    }
+}

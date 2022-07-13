@@ -1,22 +1,24 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { iUser } from '../../interfaces/interfaces';
+import { iUserLogged } from '../../interfaces/interfaces';
 import * as ac from './action.creator';
-
-const initialState: iUser[] = [];
-
+const initialState: iUserLogged = {
+    token: '',
+    user: {
+        id: '',
+        name: '',
+        email: '',
+        password: '',
+        suitcases: [],
+    },
+};
 export const userReducer = createReducer(initialState, (builder) => {
     return builder
-        .addCase(ac.loadUserAction, (state, action) => [...action.payload])
-        .addCase(ac.createUserAction, (state, action) => [
-            ...state,
-            action.payload,
-        ])
-        .addCase(ac.modifyUserAction, (state, action) =>
-            state.map((item) =>
-                item.id === action.payload.id ? action.payload : item
-            )
+        .addCase(ac.loadUserAction, (state, action) => action.payload)
+        .addCase(
+            ac.modifyUserAction,
+            (state, action) => (state = action.payload)
         )
-        .addCase(ac.deleteUserAction, (state, action) =>
-            state.filter((item) => item.id !== action.payload.id)
-        );
+        .addCase(ac.createUserAction, (state, action) => action.payload)
+        .addCase(ac.deleteUserAction, (state, action) => action.payload)
+        .addDefaultCase((state) => state);
 });

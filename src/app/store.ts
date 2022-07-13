@@ -1,18 +1,18 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { iItem, iSuitcase, iUser } from '../interfaces/interfaces';
+import { configureStore } from '@reduxjs/toolkit';
+import { iItem, iSuitcase, userWithToken } from '../interfaces/interfaces';
 import { itemReducer } from '../reducers/items.reducer/item.reducer';
 import { suitcaseReducer } from '../reducers/suitcases.reducer/suitcase.reducer';
 import { userReducer } from '../reducers/users.reducer/user.reducer';
 
 export interface iState {
     items: Array<iItem>;
-    users: Array<iUser>;
+    users: userWithToken;
     suitcases: Array<iSuitcase>;
 }
 
-const preloadedState = {
+const preloadedState: iState = {
     items: [],
-    users: [],
+    users: {} as userWithToken,
     suitcases: [],
 };
 
@@ -24,12 +24,3 @@ export const store = configureStore({
     },
     preloadedState,
 });
-
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppThunk<ReturnType = void> = ThunkAction<
-    ReturnType,
-    RootState,
-    unknown,
-    Action<string>
->;

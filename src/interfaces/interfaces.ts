@@ -1,3 +1,5 @@
+import { ReactElement } from 'react';
+
 export enum destination {
     'beach' = 'beach',
     'campsite' = 'campsite',
@@ -31,4 +33,18 @@ export interface iItem {
     name: string;
     weight: number;
     destination?: destination;
+}
+
+export interface iMenuItem {
+    path: string;
+    label: string;
+    page: ReactElement;
+    title?: string;
+}
+
+export type aMenuItems = Array<iMenuItem>;
+
+export interface iUserLogged {
+    token: string;
+    user: iUser;
 }
