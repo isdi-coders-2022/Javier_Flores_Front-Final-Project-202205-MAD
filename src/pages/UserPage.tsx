@@ -1,7 +1,9 @@
+import { SuitcaseInfo } from '../components/suitcaseInfo/suitcaseInfo';
+
 export function UserPage() {
     return (
         <div className="UserPage">
-            <h1>UserPage</h1>
+            <SuitcaseInfo></SuitcaseInfo>
         </div>
     );
 }

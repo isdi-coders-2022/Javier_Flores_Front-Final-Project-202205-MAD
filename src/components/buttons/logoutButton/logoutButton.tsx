@@ -1,3 +1,3 @@
 export function LogoutButton() {
-    return <button className="LogoutButton">Logout</button>;
+    return <button className="logoutButton">Logout</button>;
 }

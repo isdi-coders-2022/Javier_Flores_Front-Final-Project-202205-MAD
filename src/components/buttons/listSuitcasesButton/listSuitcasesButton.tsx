@@ -1,3 +1,3 @@
-export function LogoutButton() {
-    return <button className="LogoutButton">Logout</button>;
+export function ListSuitcasesButton() {
+    return <button className="listSuitcasesButton">List of suitcases</button>;
 }
