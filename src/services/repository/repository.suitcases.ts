@@ -1,17 +1,22 @@
 import axios from 'axios';
 import { iSuitcase } from '../../interfaces/interfaces';
 
-const url = 'http://localhost:3900/suitcase/';
+export class UsersRepository {
+    url: string;
+    constructor() {
+        this.url = 'http://localhost:3900/suitcase/';
+    }
 
-export function getAllSuitcases(): Promise<Array<iSuitcase>> {
-    return axios.get(url);
-}
-export function addSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
-    return axios.post(url, suitcase);
-}
-export function updateSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
-    return axios.patch(url + suitcase.id, suitcase);
-}
-export function deleteSuitcase(id: iSuitcase['id']) {
-    return axios.delete(url + id);
+    getAllSuitcases(): Promise<Array<iSuitcase>> {
+        return axios.get(this.url);
+    }
+    addSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
+        return axios.post(this.url, suitcase);
+    }
+    updateSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
+        return axios.patch(this.url + suitcase.id, suitcase);
+    }
+    deleteSuitcase(id: iSuitcase['id']) {
+        return axios.delete(this.url + id);
+    }
 }

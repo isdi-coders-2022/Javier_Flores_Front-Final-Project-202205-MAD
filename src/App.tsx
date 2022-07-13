@@ -9,12 +9,16 @@ import './App.css';
 import { aMenuItems } from './interfaces/interfaces';
 import { ChecklistPage } from './pages/checklistPage';
 import { LoginPage } from './pages/loginPage';
+import { RegisterPage } from './pages/registerPage';
+import { SuitcaseCreator } from './pages/suitcaseCreatorPage';
 
 function App() {
     return (
         <>
-            <ChecklistPage></ChecklistPage>
             <LoginPage></LoginPage>
+            <RegisterPage></RegisterPage>
+            <SuitcaseCreator></SuitcaseCreator>
+            <ChecklistPage></ChecklistPage>
         </>
     );
 }
