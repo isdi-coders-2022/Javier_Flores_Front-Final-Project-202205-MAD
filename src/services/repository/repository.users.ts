@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { iUser, userWithToken } from '../../interfaces/interfaces';
+import { iUser, iUserLogged } from '../../interfaces/interfaces';
 export class UsersRepository {
     url: string;
     constructor() {
@@ -9,7 +9,8 @@ export class UsersRepository {
     registerUser(user: iUser): Promise<iUser> {
         return axios.post(this.url, user);
     }
-    loginUser(user: Partial<iUser>): Promise<userWithToken> {
+    loginUser(user: Partial<iUser>): Promise<iUserLogged> {
+        console.log(user);
         return axios.post(this.url + 'login', user);
     }
 
