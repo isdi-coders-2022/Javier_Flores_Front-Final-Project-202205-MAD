@@ -8,12 +8,14 @@ export interface iState {
     items: Array<iItem>;
     users: iUserLogged;
     suitcases: Array<iSuitcase>;
+    suggestions: Array<iItem>;
 }
 
 const preloadedState: iState = {
     items: [],
     users: {} as iUserLogged,
     suitcases: [],
+    suggestions: [],
 };
 
 export const store = configureStore({
@@ -21,6 +23,7 @@ export const store = configureStore({
         users: userReducer,
         suitcases: suitcaseReducer,
         items: itemReducer,
+        suggestions: itemReducer,
     },
     preloadedState,
 });

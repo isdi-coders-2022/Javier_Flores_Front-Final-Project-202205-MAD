@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { iSuitcase } from '../../interfaces/interfaces';
 
-export class UsersRepository {
+export class SuitcasesRepository {
     url: string;
     constructor() {
         this.url = 'http://localhost:3900/suitcase/';

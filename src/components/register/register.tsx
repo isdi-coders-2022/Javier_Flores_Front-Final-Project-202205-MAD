@@ -48,6 +48,15 @@ export function Register() {
                     onChange={handleChange}
                     required
                 />
+                <p className="form__input">Repeat Password</p>
+                <input
+                    className="input"
+                    type="password"
+                    name="repPassword"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                />
                 <div>
                     <button className="button__register" type="submit">
                         Create

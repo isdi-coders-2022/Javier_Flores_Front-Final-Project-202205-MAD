@@ -1,13 +1,13 @@
 import { useDispatch } from 'react-redux';
 import { SyntheticEvent, useState } from 'react';
-// import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UsersRepository } from '../../services/repository/repository.users';
 import { loadUserAction } from '../../reducers/users.reducer/action.creator';
 // import { LocalStorage } from '../../services/localStorage/localStorage';
 import { iUserLogged } from '../../interfaces/interfaces';
 
 export function FormLogin() {
-    const dispatcher = useDispatch();
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState({
         name: '',
         password: '',
@@ -20,7 +20,7 @@ export function FormLogin() {
         );
         console.log(loginUser);
         if (loginUser.token) {
-            dispatcher(loadUserAction(loginUser));
+            dispatch(loadUserAction(loginUser));
             localStorage.setItem('token', loginUser.token);
             // navegate('/');
         }
@@ -59,6 +59,7 @@ export function FormLogin() {
             </form>
         </>
     );
+    console.log(dispatch);
     return template;
 }
 export default FormLogin;
