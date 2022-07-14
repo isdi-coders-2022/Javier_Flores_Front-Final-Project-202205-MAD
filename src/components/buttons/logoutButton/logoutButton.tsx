@@ -1,3 +1,12 @@
+import { Link } from 'react-router-dom';
+
 export function LogoutButton() {
-    return <button className="logoutButton">Logout</button>;
+    return (
+        <>
+            <Link to="/register">
+                <button className="logoutButton">Logout</button>
+            </Link>
+            ;
+        </>
+    );
 }

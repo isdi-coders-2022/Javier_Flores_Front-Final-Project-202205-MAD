@@ -1,16 +1,18 @@
+import { SyntheticEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { SuitcasesRepository } from '../../services/repository/repository.suitcases';
+
 export function WeightSuitcase() {
+    dispatch = useDispatch();
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        password: '',
+        weight: '',
+        suitcaseId: '',
     });
 
     async function handleSubmit(ev: SyntheticEvent) {
         ev.preventDefault();
-        const registerUser = await new SuitcasesRepository().registerUser(
-            formData
-        );
-        console.log(registerUser);
+        const addedWeight = await new SuitcasesRepository().addSuitcase();
+        console.log(addedWeight);
     }
 
     function handleChange(ev: SyntheticEvent) {
@@ -20,10 +22,16 @@ export function WeightSuitcase() {
 
     return (
         <div className="WeightSuitcase">
-            <form>
-                <label>
-                    Weight: <input type="number" />
-                </label>
+            <form onSubmit={handleSubmit}>
+                <p className="form__input">Limit weight</p>
+                <input
+                    className="input"
+                    type="number"
+                    name="limitWeight"
+                    value={formData.limitWeight}
+                    onChange={handleChange}
+                    required
+                />
             </form>
         </div>
     );

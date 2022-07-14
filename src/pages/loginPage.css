@@ -1,0 +1,11 @@
+.div__logo {
+    margin-top: 3rem;
+    margin-bottom: 6rem;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
