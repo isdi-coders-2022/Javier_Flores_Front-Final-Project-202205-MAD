@@ -1,4 +1,3 @@
-import { destination, iItem } from '../../interfaces/interfaces';
 export class SuggestionsRepository {
     url: string;
     constructor() {

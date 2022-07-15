@@ -1,18 +1,31 @@
 import { SyntheticEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { iState } from '../../app/store';
+import { iSuitcase } from '../../interfaces/interfaces';
+import {
+    createSuitcaseAction,
+    loadSuitcaseAction,
+} from '../../reducers/suitcases.reducer/action.creator';
 import { SuitcasesRepository } from '../../services/repository/repository.suitcases';
 
 export function WeightSuitcase() {
-    dispatch = useDispatch();
-    const [formData, setFormData] = useState({
-        weight: '',
-        suitcaseId: '',
-    });
-
+    const dispatch = useDispatch();
+    const userId = localStorage.getItem('userId');
+    const newSuitcase: iSuitcase = {
+        limitWeight: 0,
+        destination: 'beach',
+        owner: userId as string,
+        isWeightOk: true,
+    };
+    const saveSuitcase = dispatch(createSuitcaseAction(newSuitcase));
+    console.log(saveSuitcase);
+    const addWeight = useSelector((store: iState) => store.userSuitcase);
     async function handleSubmit(ev: SyntheticEvent) {
         ev.preventDefault();
-        const addedWeight = await new SuitcasesRepository().addSuitcase();
-        console.log(addedWeight);
+
+        const addedWeight = await new SuitcasesRepository().addSuitcase(
+            newSuitcase
+        );
     }
 
     function handleChange(ev: SyntheticEvent) {
@@ -28,7 +41,7 @@ export function WeightSuitcase() {
                     className="input"
                     type="number"
                     name="limitWeight"
-                    value={formData.limitWeight}
+                    value={newSuitcase.limitWeight}
                     onChange={handleChange}
                     required
                 />

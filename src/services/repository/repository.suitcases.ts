@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { iSuitcase } from '../../interfaces/interfaces';
 
 export class SuitcasesRepository {
@@ -7,16 +6,36 @@ export class SuitcasesRepository {
         this.url = 'http://localhost:3900/suitcase/';
     }
 
-    getAllSuitcases(): Promise<Array<iSuitcase>> {
-        return axios.get(this.url);
-    }
+    // getAllSuitcases(): Promise<Array<iSuitcase>> {
+    //     return fetch(this.url).then((res) => {
+    //         return res.json();
+    //     });
+    // }
     addSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
-        return axios.post(this.url, suitcase);
+        return fetch(this.url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(suitcase),
+        }).then((res) => {
+            return res.json();
+        });
     }
     updateSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
-        return axios.patch(this.url + suitcase.id, suitcase);
+        return fetch(this.url + suitcase.id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(suitcase),
+        }).then((res) => {
+            return res.json();
+        });
     }
     deleteSuitcase(id: iSuitcase['id']) {
-        return axios.delete(this.url + id);
+        return fetch(this.url + id, {
+            method: 'DELETE',
+        });
     }
 }

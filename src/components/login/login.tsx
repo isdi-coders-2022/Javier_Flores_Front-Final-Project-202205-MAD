@@ -33,20 +33,21 @@ export function FormLogin() {
     const template = (
         <>
             <form onSubmit={handleSubmit}>
-                <p className="form__input">Name</p>
                 <input
                     className="input"
                     type="text"
                     name="name"
+                    placeholder="Name"
                     value={formData.name}
                     onChange={handleChange}
                     required
                 />
-                <p className="form__input">Password</p>
+                <br />
                 <input
                     className="input"
                     type="password"
                     name="password"
+                    placeholder="Password"
                     value={formData.password}
                     onChange={handleChange}
                     required
@@ -59,7 +60,6 @@ export function FormLogin() {
             </form>
         </>
     );
-    console.log(dispatch);
     return template;
 }
 export default FormLogin;

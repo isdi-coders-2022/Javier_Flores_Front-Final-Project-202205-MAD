@@ -2,6 +2,7 @@ import { NewUserButton } from '../components/buttons/newUserButton/newUserButton
 import { FormLogin } from '../components/login/login';
 import { Filler } from './fillerPage';
 import './loginPage.css';
+import { SuitcaseCreator } from './suitcaseCreatorPage';
 export function LoginPage() {
     return (
         <>
@@ -120,6 +121,7 @@ export function LoginPage() {
             </div>
             <FormLogin></FormLogin>
             <NewUserButton></NewUserButton>
+            <SuitcaseCreator></SuitcaseCreator>
             <Filler></Filler>
         </>
     );
