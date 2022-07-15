@@ -2,7 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { iSuitcase } from '../../interfaces/interfaces';
 import { actionTypes } from './action.types';
 
-export const loadSuitcaseAction = createAction<iSuitcase[]>(
+export const loadSuitcaseAction = createAction<iSuitcase>(
     actionTypes['suitcase@load']
 );
 

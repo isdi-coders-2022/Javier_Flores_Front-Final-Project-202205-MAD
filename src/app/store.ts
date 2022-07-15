@@ -5,23 +5,23 @@ import { suitcaseReducer } from '../reducers/suitcases.reducer/suitcase.reducer'
 import { userReducer } from '../reducers/users.reducer/user.reducer';
 
 export interface iState {
-    items: Array<iItem>;
     users: iUserLogged;
-    suitcases: Array<iSuitcase>;
+    userSuitcase: iSuitcase;
+    items: Array<iItem>;
     suggestions: Array<iItem>;
 }
 
 const preloadedState: iState = {
-    items: [],
     users: {} as iUserLogged,
-    suitcases: [],
+    userSuitcase: {} as iSuitcase,
+    items: [],
     suggestions: [],
 };
 
 export const store = configureStore({
     reducer: {
         users: userReducer,
-        suitcases: suitcaseReducer,
+        userSuitcase: suitcaseReducer,
         items: itemReducer,
         suggestions: itemReducer,
     },

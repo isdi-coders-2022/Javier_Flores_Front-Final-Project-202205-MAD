@@ -2,7 +2,6 @@ import React, { useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { destination } from './interfaces/interfaces';
 import { ChecklistPage } from './pages/checklistPage';
 import { LoginPage } from './pages/loginPage';
 import { RegisterPage } from './pages/registerPage';

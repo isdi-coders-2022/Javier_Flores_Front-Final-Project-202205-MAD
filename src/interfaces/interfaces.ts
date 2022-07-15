@@ -1,12 +1,5 @@
 import { ReactElement } from 'react';
 
-export enum destination {
-    'beach' = 'beach',
-    'campsite' = 'campsite',
-    'mountain' = 'mountain',
-    'rainy' = 'rainy',
-}
-
 export interface iUser {
     id?: string;
     name: string;
@@ -18,7 +11,7 @@ export interface iUser {
 export interface iSuitcase {
     id?: string;
     limitWeight: number;
-    destination?: destination;
+    destination: string;
     owner: string;
     items?: [
         {
