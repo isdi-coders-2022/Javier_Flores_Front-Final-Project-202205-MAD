@@ -4,7 +4,7 @@ export function NewUserButton() {
     return (
         <div className="NewUserButton">
             <Link to="/register">
-                <button>New User</button>
+                <button className="button__register">New User</button>
             </Link>
         </div>
     );

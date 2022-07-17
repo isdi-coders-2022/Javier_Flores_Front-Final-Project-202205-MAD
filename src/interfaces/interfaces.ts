@@ -10,6 +10,7 @@ export interface iUser {
 
 export interface iSuitcase {
     id?: string;
+    _id?: string;
     limitWeight: number;
     destination: string;
     owner: string;
@@ -24,11 +25,13 @@ export interface iSuitcase {
 }
 export interface iItem {
     id?: string;
+    _id?: string;
     name: string;
     weight: number;
-    destination?: destination;
+    destination: string;
 }
 
+export interface iUserItem {}
 export interface iMenuItem {
     path: string;
     label: string;
@@ -39,6 +42,8 @@ export interface iMenuItem {
 export type aMenuItems = Array<iMenuItem>;
 
 export interface iUserLogged {
+    id?: string;
+    _id?: string;
     token: string;
     user: iUser;
 }
