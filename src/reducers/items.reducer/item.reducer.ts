@@ -13,10 +13,10 @@ export const itemReducer = createReducer(initialState, (builder) => {
         ])
         .addCase(ac.modifyItemAction, (state, action) =>
             state.map((item) =>
-                item.id === action.payload.id ? action.payload : item
+                item._id === action.payload._id ? action.payload : item
             )
         )
         .addCase(ac.deleteItemAction, (state, action) =>
-            state.filter((item) => item.id !== action.payload.id)
+            state.filter((item) => item._id !== action.payload._id)
         );
 });

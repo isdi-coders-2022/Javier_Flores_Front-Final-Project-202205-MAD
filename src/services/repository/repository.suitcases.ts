@@ -1,16 +1,16 @@
 import { iSuitcase } from '../../interfaces/interfaces';
 
+const token = localStorage.getItem('token');
 export class SuitcasesRepository {
     url: string;
     constructor() {
         this.url = 'http://localhost:3900/suitcase/';
     }
 
-    // getAllSuitcases(): Promise<Array<iSuitcase>> {
-    //     return fetch(this.url).then((res) => {
-    //         return res.json();
-    //     });
-    // }
+    getSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
+        return fetch(this.url + `/${suitcase.id}`).then((resp) => resp.json());
+    }
+
     addSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
         return fetch(this.url, {
             method: 'POST',
@@ -22,11 +22,15 @@ export class SuitcasesRepository {
             return res.json();
         });
     }
-    updateSuitcase(suitcase: iSuitcase): Promise<iSuitcase> {
-        return fetch(this.url + suitcase.id, {
+    updateSuitcase(
+        suitcase: Partial<iSuitcase>,
+        _id: String
+    ): Promise<iSuitcase> {
+        return fetch(this.url + _id, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`,
             },
             body: JSON.stringify(suitcase),
         }).then((res) => {

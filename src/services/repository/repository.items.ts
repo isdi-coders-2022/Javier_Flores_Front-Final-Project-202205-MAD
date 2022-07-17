@@ -1,17 +1,39 @@
 import axios from 'axios';
 import { iItem } from '../../interfaces/interfaces';
 
-const url = 'http://localhost:3900/item/';
+export class ItemsRepository {
+    url: string;
+    constructor() {
+        this.url = 'http://localhost:3900/item/';
+    }
 
-export function getAllItems(): Promise<Array<iItem>> {
-    return axios.get(url);
-}
-export function addItem(item: iItem): Promise<iItem> {
-    return axios.post(url, item);
-}
-export function updateItem(item: iItem): Promise<iItem> {
-    return axios.patch(url + item.id, item);
-}
-export function deleteItem(id: iItem['id']) {
-    return axios.delete(url + id);
+    getAllItems(): Promise<Array<iItem>> {
+        return fetch(this.url).then((response) => response.json());
+    }
+    getItem(id: iItem['id']): Promise<iItem> {
+        return fetch(this.url + id).then((response) => response.json());
+    }
+    addItem(item: iItem): Promise<iItem> {
+        return fetch(this.url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(item),
+        }).then((response) => response.json());
+    }
+    updateItem(item: iItem): Promise<iItem> {
+        return fetch(this.url + item.id, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(item),
+        }).then((response) => response.json());
+    }
+    deleteItem(id: iItem['id']) {
+        return fetch(this.url + id, {
+            method: 'DELETE',
+        });
+    }
 }

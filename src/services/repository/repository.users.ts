@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { iUser, iUserLogged } from '../../interfaces/interfaces';
 export class UsersRepository {
     url: string;
@@ -7,14 +6,28 @@ export class UsersRepository {
     }
 
     registerUser(user: iUser): Promise<iUser> {
-        return axios.post(this.url, user);
+        return fetch(this.url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        }).then((response) => response.json());
     }
     loginUser(user: Partial<iUser>): Promise<iUserLogged> {
         console.log(user);
-        return axios.post(this.url + 'login', user);
+        return fetch(this.url + 'login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        }).then((response) => response.json());
     }
 
     deleteUser(id: iUser['id']) {
-        return axios.delete(this.url + id);
+        return fetch(this.url + id, {
+            method: 'DELETE',
+        });
     }
 }

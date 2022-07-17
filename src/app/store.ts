@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { iItem, iSuitcase, iUserLogged } from '../interfaces/interfaces';
 import { itemReducer } from '../reducers/items.reducer/item.reducer';
+import { itemInSuitcaseReducer } from '../reducers/itemsInSuitcase.reducer/itemInSuitcase.reducer';
 import { suitcaseReducer } from '../reducers/suitcases.reducer/suitcase.reducer';
 import { userReducer } from '../reducers/users.reducer/user.reducer';
 
@@ -9,6 +10,7 @@ export interface iState {
     userSuitcase: iSuitcase;
     items: Array<iItem>;
     suggestions: Array<iItem>;
+    itemsInSuitcase: Array<iItem>;
 }
 
 const preloadedState: iState = {
@@ -16,6 +18,7 @@ const preloadedState: iState = {
     userSuitcase: {} as iSuitcase,
     items: [],
     suggestions: [],
+    itemsInSuitcase: [],
 };
 
 export const store = configureStore({
@@ -24,6 +27,7 @@ export const store = configureStore({
         userSuitcase: suitcaseReducer,
         items: itemReducer,
         suggestions: itemReducer,
+        itemsInSuitcase: itemInSuitcaseReducer,
     },
     preloadedState,
 });

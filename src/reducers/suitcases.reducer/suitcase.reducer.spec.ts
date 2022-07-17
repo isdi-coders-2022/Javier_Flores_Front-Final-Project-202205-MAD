@@ -7,15 +7,16 @@ const mockedSuitcase: iSuitcase =
     {
         id: '1',
         limitWeight: 1,
+        destination: "beach",
         owner: '1',
         isWeightOk: false,
     },
   
 describe('Given suitcases reducer', () => {
-    describe('When calling it with load action with an array of suitcases', () => {
+    describe('When calling it with load action', () => {
         test('It should return a new state with that array of suitcases', () => {
             const newState = suitcaseReducer(
-                [],
+                mockedSuitcase,
                 actions.loadSuitcaseAction(mockedSuitcase)
             );
             expect(newState).toEqual(mockedSuitcase);
@@ -24,7 +25,7 @@ describe('Given suitcases reducer', () => {
     describe('When calling it with add action with a suitcase', () => {
         test('It should return a new state with an array with that suitcase', () => {
             const newState = suitcaseReducer(
-                [],
+                mockedSuitcase,
                 actions.createSuitcaseAction(mockedSuitcase)
             );
             expect(newState).toEqual(mockedSuitcase);
@@ -48,9 +49,9 @@ describe('Given suitcases reducer', () => {
         test('It should return a new state with an array of previous suitcases without the deleted one', () => {
             const newState = suitcaseReducer(
                 mockedSuitcase,
-                actions.deleteSuitcaseAction(mockedSuitcase[0])
+                actions.deleteSuitcaseAction(mockedSuitcase)
             );
-            expect(newState).toEqual([mockedSuitcase[1]]);
+            expect(newState).toEqual(mockedSuitcase);
         });
     });
     describe('When calling it with a non related action', () => {
