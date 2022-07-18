@@ -1,4 +1,5 @@
 import { iUser, iUserLogged } from '../../interfaces/interfaces';
+
 export class UsersRepository {
     url: string;
     constructor() {
@@ -28,6 +29,9 @@ export class UsersRepository {
     deleteUser(id: iUser['id']) {
         return fetch(this.url + id, {
             method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         });
     }
 }

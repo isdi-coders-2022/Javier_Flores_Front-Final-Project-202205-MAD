@@ -46,7 +46,7 @@ export function ItemForm() {
                 <br />
                 <input
                     className="input"
-                    type="float"
+                    type="number"
                     name="weight"
                     placeholder="Weight"
                     value={formData.weight}

@@ -19,12 +19,11 @@ export function FormLogin() {
         const loginUser: iUserLogged = await new UsersRepository().loginUser(
             formData
         );
-        console.log(loginUser);
+
         if (loginUser.token) {
             dispatch(loadUserAction(loginUser));
             localStorage.setItem('token', loginUser.token);
             localStorage.setItem('userId', loginUser.id as string);
-            console.log(loginUser.token);
 
             navigate('/newSuitcase');
         }

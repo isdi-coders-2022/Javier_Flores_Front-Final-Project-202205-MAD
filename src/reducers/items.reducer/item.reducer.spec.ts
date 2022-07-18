@@ -8,11 +8,13 @@ const mockedArray: Array<iItem> = [
         id: '1',
         name: '1',
         weight: 1,
+        destination: '1',
     },
     {
         id: '2',
         name: '2',
         weight: 2,
+        destination: '2',
     },
 ];
 describe('Given items reducer', () => {
@@ -52,7 +54,7 @@ describe('Given items reducer', () => {
                 mockedArray,
                 actions.deleteItemAction(mockedArray[0])
             );
-            expect(newState).toEqual([mockedArray[1]]);
+            expect(newState).toEqual([]);
         });
     });
     describe('When calling it with a non related action', () => {

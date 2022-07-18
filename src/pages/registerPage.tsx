@@ -23,7 +23,7 @@ export function RegisterPage() {
                             cy="234.5"
                             r="227.5"
                             stroke="#FBFCFD"
-                            stroke-width="14"
+                            strokeWidth="14"
                         />
                     </g>
                     <g filter="url(#filter1_d_96_154)">
@@ -44,10 +44,10 @@ export function RegisterPage() {
                             width="477"
                             height="477"
                             filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
+                            colorInterpolationFilters="sRGB"
                         >
                             <feFlood
-                                flood-opacity="0"
+                                floodOpacity="0"
                                 result="BackgroundImageFix"
                             />
                             <feColorMatrix
@@ -82,10 +82,10 @@ export function RegisterPage() {
                             width="297.6"
                             height="335.367"
                             filterUnits="userSpaceOnUse"
-                            color-interpolation-filters="sRGB"
+                            colorInterpolationFilters="sRGB"
                         >
                             <feFlood
-                                flood-opacity="0"
+                                floodOpacity="0"
                                 result="BackgroundImageFix"
                             />
                             <feColorMatrix

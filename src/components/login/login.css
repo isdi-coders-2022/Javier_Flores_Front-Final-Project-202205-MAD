@@ -20,7 +20,7 @@
     padding: 10px;
     margin-bottom: 0.7rem;
 }
-button {
+.button__login {
     width: 100%;
     height: 40px;
     border-radius: 5px;

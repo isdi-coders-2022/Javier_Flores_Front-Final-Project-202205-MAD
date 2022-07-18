@@ -1,6 +1,5 @@
 import { iSuitcase } from '../../interfaces/interfaces';
 
-const token = localStorage.getItem('token');
 export class SuitcasesRepository {
     url: string;
     constructor() {
@@ -30,7 +29,7 @@ export class SuitcasesRepository {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
-                authorization: `Bearer ${token}`,
+                authorization: `Bearer ${localStorage.getItem('token')}`,
             },
             body: JSON.stringify(suitcase),
         }).then((res) => {
@@ -40,6 +39,9 @@ export class SuitcasesRepository {
     deleteSuitcase(id: iSuitcase['id']) {
         return fetch(this.url + id, {
             method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
         });
     }
 }
