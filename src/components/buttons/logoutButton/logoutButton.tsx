@@ -5,8 +5,7 @@ export function LogoutButton() {
     const navigate = useNavigate();
     function handleClick(ev: SyntheticEvent) {
         ev.preventDefault();
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userSuitcase');
+        localStorage.clear();
         navigate('/');
     }
     return (
