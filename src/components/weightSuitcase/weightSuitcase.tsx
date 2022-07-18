@@ -25,8 +25,8 @@ export function WeightSuitcase() {
         const suitcase = await new SuitcasesRepository().addSuitcase(
             newSuitcase
         );
-        dispatch(createSuitcaseAction(suitcase));
         console.log(suitcase);
+        dispatch(createSuitcaseAction(suitcase));
     }
 
     async function handleSubmit(ev: SyntheticEvent) {

@@ -42,14 +42,6 @@ export function Filler() {
         const addedItem = suggestions.find((x) => x._id === element.value);
         dispatch(createItemInSuitcaseAction(addedItem as iItem));
         element.style.display = 'none'; // hide suggestion when clicked
-
-        // Modify the items suitcase array
-        // dispatch(
-        //     modifySuitcaseAction({
-        //         ...userSuitcase,
-        //         items: [{ item: addedItem, quantity: 1, isChequed: false }],
-        //     })
-        // );
         console.log(userSuitcase, 'EEEEEEEEE');
     }
 
@@ -71,7 +63,6 @@ export function Filler() {
             </div>
             <ItemForm></ItemForm>
             <SuitcaseList></SuitcaseList>
-            <ChecklistPage></ChecklistPage>
         </>
     );
 }

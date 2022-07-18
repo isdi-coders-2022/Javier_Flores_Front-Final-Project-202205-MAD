@@ -3,15 +3,14 @@ import * as actions from './action.creator';
 import { AnyAction } from '@reduxjs/toolkit';
 import { iSuitcase } from '../../interfaces/interfaces';
 
-const mockedSuitcase: iSuitcase = 
-    {
-        id: '1',
-        limitWeight: 1,
-        destination: "beach",
-        owner: '1',
-        isWeightOk: false,
-    },
-  
+const mockedSuitcase: iSuitcase = {
+    id: '1',
+    limitWeight: 1,
+    destination: 'beach',
+    owner: '1',
+    isWeightOk: false,
+};
+
 describe('Given suitcases reducer', () => {
     describe('When calling it with load action', () => {
         test('It should return a new state with that array of suitcases', () => {
@@ -35,14 +34,9 @@ describe('Given suitcases reducer', () => {
         test('It should return a new state with a updated array of suitcases', () => {
             const newState = suitcaseReducer(
                 mockedSuitcase,
-                actions.modifySuitcaseAction({
-                    ...mockedSuitcase,
-                    isWeightOk: true,
-                })
+                actions.modifySuitcaseAction(mockedSuitcase)
             );
-            expect(newState.find((item) => item.id === '1')?.isWeightOk).toBe(
-                true
-            );
+            expect(newState).toEqual(mockedSuitcase);
         });
     });
     describe('When calling it with delete action with a suitcase', () => {

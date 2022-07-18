@@ -1,6 +1,7 @@
 import { SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../../../app/store';
+import { iUserItems } from '../../../interfaces/interfaces';
 import { modifySuitcaseAction } from '../../../reducers/suitcases.reducer/action.creator';
 
 export function AddListButton() {
@@ -22,10 +23,10 @@ export function AddListButton() {
         const addListtoSuitcase = await dispatch(
             modifySuitcaseAction({
                 ...userSuitcase,
-                items: addQuantityAndCheck,
+                items: [addQuantityAndCheck as unknown as iUserItems],
             })
         );
-        console.log(userSuitcase);
+        console.log(addListtoSuitcase);
     }
 
     return (

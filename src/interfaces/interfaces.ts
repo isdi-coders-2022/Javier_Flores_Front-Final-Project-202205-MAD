@@ -31,16 +31,11 @@ export interface iItem {
     destination: string;
 }
 
-export interface iUserItem {}
-export interface iMenuItem {
-    path: string;
-    label: string;
-    page: ReactElement;
-    title?: string;
+export interface iUserItems {
+    item: iItem;
+    quantity: number;
+    isChecked: boolean;
 }
-
-export type aMenuItems = Array<iMenuItem>;
-
 export interface iUserLogged {
     id?: string;
     _id?: string;

@@ -1,127 +1,90 @@
-import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
-import { iState, store } from '../../app/store';
-import { iSuitcase, iUserLogged } from '../../interfaces/interfaces';
-import { itemReducer } from '../../reducers/items.reducer/item.reducer';
-import { suitcaseReducer } from '../../reducers/suitcases.reducer/suitcase.reducer';
-import { userReducer } from '../../reducers/users.reducer/user.reducer';
-import { fireEvent, render, screen } from '../../utils/test.utils';
+import { useDispatch } from 'react-redux';
+import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { iSuitcase, iUser, iUserLogged } from '../../interfaces/interfaces';
+// import { fireEvent, render, screen  } from '../../utils/test.utils';
 import FormLogin from './login';
-import * as reactRedux from 'react-redux';
 import { UsersRepository } from '../../services/repository/repository.users';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+jest.mock('../../services/repository/repository.users');
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
-    useNavigate: jest.fn(),
+    useDispatch: jest.fn(),
 }));
+global.localStorage = {
+    clear: jest.fn(),
+    getItem: jest.fn(),
+    key: jest.fn(),
+    removeItem: jest.fn(),
+    setItem: jest.fn(),
+    length: 0,
+};
 
-jest.mock('../../services/localStorage');
-jest.mock('../../services/http.user');
-const preloadedState: iState = {
-    users: {} as iUserLogged,
-    userSuitcase: {} as iSuitcase,
-    items: [],
-    suggestions: [],
+const mockUser = {
+    id: 'id',
+    _id: 'id',
+    token: 'token',
+    user: {} as iUser,
 };
 
 describe('Given the component FormLogin', () => {
+    UsersRepository.prototype.loginUser = jest.fn();
+    const mockDispatch = jest.fn();
+
     beforeEach(() => {
-        UsersRepository.prototype.loginUser = jest.fn().mockResolvedValue({});
+        (UsersRepository.prototype.loginUser as jest.Mock).mockResolvedValue(
+            mockUser
+        );
+        (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
     });
-    describe('When i render the component', () => {
+
+    describe('When I render the component', () => {
         test('Then it should be rendered', () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <FormLogin />
-                    </BrowserRouter>
-                </Provider>
+                <MemoryRouter>
+                    <FormLogin />
+                </MemoryRouter>
             );
-
-            expect(screen.getByLabelText(/username/i)).toBeInTheDocument();
+            expect(screen.getByText(/Enter/i)).toBeInTheDocument();
         });
     });
 
-    describe('When i click the button Login', () => {
-        test('Then it should be called the dispatch', () => {
-            const mockUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
+    describe('When I click the button Login', () => {
+        test('Then it should be called the dispatch', async () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <FormLogin />
-                    </BrowserRouter>
-                </Provider>,
-                { preloadedState, store }
+                <BrowserRouter>
+                    <FormLogin />
+                </BrowserRouter>
             );
 
-            fireEvent.click(screen.getByText(/login/i));
-
-            expect(mockUseDispatch).toHaveBeenCalled();
+            fireEvent.click(screen.getByText(/Enter/i));
+            await waitFor(() => {
+                expect(mockDispatch).toHaveBeenCalled();
+            });
         });
     });
 
     describe('When I change the input text', () => {
-        test('Then it should be changed', () => {
+        test('Then it should be changed', async () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <FormLogin />
-                    </BrowserRouter>
-                </Provider>,
-                { preloadedState, store }
+                <BrowserRouter>
+                    <FormLogin />
+                </BrowserRouter>
             );
-            const input = screen.getByLabelText(/Username/i) as HTMLFormElement;
-            fireEvent.change(input, { target: { value: 'name' } });
+            const input = screen.getByPlaceholderText(
+                /name/i
+            ) as HTMLFormElement;
 
-            expect(input).toHaveValue('name');
+            userEvent.type(input, 'testing login');
+
+            const inputAfterTyping = await screen.findByPlaceholderText(
+                /name/i
+            );
+
+            await waitFor(() => {
+                expect(inputAfterTyping).toHaveValue('testing login');
+            });
         });
     });
 });
-
-// const reducer = {
-//     users: userReducer,
-//     suitcases: suitcaseReducer,
-//     items: itemReducer,
-//     suggestions: itemReducer,
-// };
-
-// const preloadedState: iState = {
-//     items: [],
-//     users: {} as iUserLogged,
-//     suitcases: [],
-//     suggestions: [],
-// };
-
-// describe('Given the component FormLogin', () => {
-//     describe('When I render the component', () => {
-//         test('Then it should be rendered', () => {
-//             render(
-//                 <Provider store={store}>
-//                     <BrowserRouter>
-//                         <FormLogin />
-//                     </BrowserRouter>
-//                 </Provider>
-//             );
-//             const placeholder = screen.getByPlaceholderText(/Password/i);
-//             expect(placeholder).toBeInTheDocument();
-//         });
-//     });
-
-//     describe('When I click the button Login', () => {
-//         test('Then it should be called the dispatch', () => {
-//             const mockUseDispatch = jest.spyOn(reactRedux, 'useDispatch');
-//             render(
-//                 <Provider store={store}>
-//                     <BrowserRouter>
-//                         <FormLogin />
-//                     </BrowserRouter>
-//                 </Provider>,
-//                 { preloadedState, store }
-//             );
-
-//             fireEvent.click(screen.getByText(/login/i));
-
-//             expect(mockUseDispatch).toHaveBeenCalled();
-//         });
-//     });
-// });
