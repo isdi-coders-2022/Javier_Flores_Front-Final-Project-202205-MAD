@@ -20,7 +20,7 @@ export function AddListButton() {
                 isChecked: false,
             };
         });
-
+        console.log(addQuantityAndCheck, 'Items!!!!!');
         const addListtoSuitcase = await dispatch(
             modifySuitcaseAction({
                 ...userSuitcase,
@@ -29,8 +29,8 @@ export function AddListButton() {
         );
         const addItemsToSuitcase =
             await new SuitcasesRepository().updateSuitcase(
-                { items: addQuantityAndCheck },
-                userSuitcase._id
+                { items: addQuantityAndCheck as any },
+                userSuitcase._id as string
             );
         console.log(addItemsToSuitcase);
     }

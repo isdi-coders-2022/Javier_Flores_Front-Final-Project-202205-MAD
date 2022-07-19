@@ -1,8 +1,9 @@
 import { SyntheticEvent, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UsersRepository } from '../../services/repository/repository.users';
 import './register.css';
 export function Register() {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -13,6 +14,9 @@ export function Register() {
         ev.preventDefault();
         const registerUser = await new UsersRepository().registerUser(formData);
         console.log(registerUser);
+        if (registerUser.name) {
+            navigate('/');
+        }
     }
 
     function handleChange(ev: SyntheticEvent) {
@@ -23,29 +27,31 @@ export function Register() {
         <>
             <div className="div__register">
                 <form className="form__register" onSubmit={handleSubmit}>
-                    <p className="form__input">Name</p>
                     <input
-                        className="input"
+                        className="form-control"
                         type="text"
                         name="name"
+                        placeholder="Name"
                         value={formData.name}
                         onChange={handleChange}
                         required
                     />
-                    <p className="form__input">Email</p>
+
                     <input
-                        className="input"
+                        className="form-control"
                         type="email"
                         name="email"
+                        placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
-                    <p className="form__input">Password</p>
+
                     <input
-                        className="input"
+                        className="form-control"
                         type="password"
                         name="password"
+                        placeholder="Password"
                         value={formData.password}
                         onChange={handleChange}
                         required
@@ -54,11 +60,11 @@ export function Register() {
                         <button className="button__register" type="submit">
                             Create
                         </button>
-                        <Link to="/">
-                            <button>Back to login</button>
-                        </Link>
                     </div>
                 </form>
+                <Link to="/">
+                    <p>Back to login</p>
+                </Link>
             </div>
         </>
     );

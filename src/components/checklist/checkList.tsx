@@ -6,19 +6,38 @@ export function CheckList() {
     const itemsInSuitcase = useSelector(
         (store: iState) => store.itemsInSuitcase
     );
+    const quantity = 1;
+    const isChecked = false;
     return (
-        <div className="CheckList">
-            <ul className="checklist__list">
-                {itemsInSuitcase.map((item) => (
-                    <li className="list--item" key={item._id}>
-                        <span className="list--item__name">{item.name}</span>
-                        {/* <span className="list--item__quantity">1</span> */}
-                        <div className="list-item-checkbox">
-                            <input type="checkbox" />
-                        </div>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <>
+            <table className="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Items</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {itemsInSuitcase.map((item) => {
+                        return (
+                            <tr className="table-active" key={item._id}>
+                                <td>{item.name}</td>
+                                <td>{quantity}</td>
+                                <td>
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckChecked"
+                                        isChecked=""
+                                    />
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </>
     );
 }

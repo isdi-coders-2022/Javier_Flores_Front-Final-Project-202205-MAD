@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { BrowserRouter, MemoryRouter } from 'react-router-dom';
-import { iSuitcase, iUser, iUserLogged } from '../../interfaces/interfaces';
-// import { fireEvent, render, screen  } from '../../utils/test.utils';
+import { iUser } from '../../interfaces/interfaces';
 import FormLogin from './login';
 import { UsersRepository } from '../../services/repository/repository.users';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';

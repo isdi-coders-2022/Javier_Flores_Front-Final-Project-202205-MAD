@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../../app/store';
 import { AddListButton } from '../buttons/AddListButton/addListButton';
-import { DeleteListButton } from '../buttons/deleteListButton/deleteListButton';
 import { EraseList } from '../buttons/eraseList/eraseList';
 import { Sum } from '../sum/sum';
 
