@@ -38,7 +38,7 @@ export function FormLogin() {
             <div className="div__login">
                 <form className="form__login" onSubmit={handleSubmit}>
                     <input
-                        className="input"
+                        className="form-control"
                         type="text"
                         name="name"
                         placeholder="Name"
@@ -48,7 +48,7 @@ export function FormLogin() {
                     />
                     <br />
                     <input
-                        className="input"
+                        className="form-control"
                         type="password"
                         name="password"
                         placeholder="Password"

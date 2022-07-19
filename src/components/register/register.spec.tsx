@@ -1,87 +1,69 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { Provider, useDispatch } from 'react-redux';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
-import { store } from '../../app/store';
-import { iUser } from '../../interfaces/interfaces';
+import { MemoryRouter } from 'react-router-dom';
+import { iUserLogged } from '../../interfaces/interfaces';
+import { userReducer } from '../../reducers/users.reducer/user.reducer';
 import { UsersRepository } from '../../services/repository/repository.users';
+import { fireEvent, render, screen, waitFor } from '../../utils/test.utils';
 import { Register } from './register';
 
-jest.mock('../../services/repository/repository.users');
-jest.mock('react-redux', () => ({
-    ...jest.requireActual('react-redux'),
-    useDispatch: jest.fn(),
-}));
-global.localStorage = {
-    clear: jest.fn(),
-    getItem: jest.fn(),
-    key: jest.fn(),
-    removeItem: jest.fn(),
-    setItem: jest.fn(),
-    length: 0,
+const reducer = {
+    user: userReducer,
 };
-
-const mockUser = {
-    id: 'id',
-    _id: 'id',
-    token: 'token',
-    user: {} as iUser,
+const preloadedState = {
+    user: {} as iUserLogged,
 };
 
 describe('Given the component Register', () => {
-    UsersRepository.prototype.registerUser = jest.fn();
-    const mockDispatch = jest.fn();
-
-    beforeEach(() => {
-        (UsersRepository.prototype.registerUser as jest.Mock).mockResolvedValue(
-            mockUser
-        );
-        (useDispatch as jest.Mock).mockReturnValue(mockDispatch);
-    });
-
-    describe('When I render the component', () => {
-        test('Then it should be rendered', () => {
+    describe('When is called', () => {
+        test('Then it shoul render with "crear"', () => {
             render(
                 <MemoryRouter>
-                    <Register />
-                </MemoryRouter>
+                    <Register></Register>
+                </MemoryRouter>,
+                { preloadedState, reducer }
             );
-            expect(screen.getByText(/Create/i)).toBeInTheDocument();
+            const element = screen.getByText(/Create/i);
+            expect(element).toBeInTheDocument();
         });
-        describe('When I click the button Register', () => {
-            test('Then it should be called the dispatch', async () => {
+        describe('When form is filled and click button send', () => {
+            test('Then userHttpStore should be called with invalid token', async () => {
+                UsersRepository.prototype.registerUser = jest
+                    .fn()
+                    .mockResolvedValue({ user: { test: 'test' } });
                 render(
-                    <Provider store={store}>
-                        <BrowserRouter>
-                            <Register />
-                        </BrowserRouter>
-                    </Provider>
+                    <MemoryRouter>
+                        <Register></Register>
+                    </MemoryRouter>,
+                    { preloadedState, reducer }
                 );
+                const button = screen.getByRole('button');
+                fireEvent.click(button);
 
-                fireEvent.click(screen.getByText(/Create/i));
-                await waitFor(() => {
-                    expect(mockDispatch).toHaveBeenCalled();
-                });
-                describe('When I change the input text', () => {
-                    test('Then it should be called the dispatch', async () => {
-                        render(
-                            <BrowserRouter>
-                                <Register />
-                            </BrowserRouter>
-                        );
+                expect(UsersRepository.prototype.registerUser).toBeCalled();
+            });
 
-                        fireEvent.change(screen.getByLabelText(/Name/i), {
-                            target: { value: 'name' },
+            describe('When form is filled and click button login', () => {
+                test('then navigate should be called', () => {
+                    UsersRepository.prototype.registerUser = jest
+                        .fn()
+                        .mockResolvedValue({
+                            name: '',
+                            user: { test: 'test' },
                         });
-                        fireEvent.change(screen.getByLabelText(/Email/i), {
-                            target: { value: 'email' },
-                        });
-                        fireEvent.change(screen.getByLabelText(/Password/i), {
-                            target: { value: 'password' },
-                        });
-                        await waitFor(() => {
-                            expect(mockDispatch).toHaveBeenCalled();
-                        });
-                    });
+                    render(
+                        <MemoryRouter>
+                            <Register></Register>
+                        </MemoryRouter>,
+                        { preloadedState, reducer }
+                    );
+                    const input = screen.getByPlaceholderText(
+                        /email/i
+                    ) as HTMLFormElement;
+                    fireEvent.change(input, { target: { value: 'email' } });
+
+                    const button = screen.getByText(/Create/);
+                    fireEvent.click(button);
+
+                    expect(UsersRepository.prototype.registerUser).toBeCalled();
                 });
             });
         });

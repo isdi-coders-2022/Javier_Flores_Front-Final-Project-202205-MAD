@@ -21,5 +21,5 @@ export const itemInSuitcaseReducer = createReducer(initialState, (builder) => {
         .addCase(ac.deleteItemInSuitcaseAction, (state, action) =>
             state.filter((item) => item._id !== action.payload._id)
         )
-        .addCase(ac.deleteAllItemInSuitcaseAction, (state, action) => []);
+        .addCase(ac.deleteAllItemInSuitcaseAction, () => initialState);
 });
