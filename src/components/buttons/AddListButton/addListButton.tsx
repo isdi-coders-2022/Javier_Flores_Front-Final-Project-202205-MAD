@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../../../app/store';
 import { iUserItems } from '../../../interfaces/interfaces';
 import { modifySuitcaseAction } from '../../../reducers/suitcases.reducer/action.creator';
+import { SuitcasesRepository } from '../../../services/repository/repository.suitcases';
 
 export function AddListButton() {
     const dispatch = useDispatch();
@@ -26,7 +27,12 @@ export function AddListButton() {
                 items: [addQuantityAndCheck as unknown as iUserItems],
             })
         );
-        console.log(addListtoSuitcase);
+        const addItemsToSuitcase =
+            await new SuitcasesRepository().updateSuitcase(
+                { items: addQuantityAndCheck },
+                userSuitcase._id
+            );
+        console.log(addItemsToSuitcase);
     }
 
     return (
