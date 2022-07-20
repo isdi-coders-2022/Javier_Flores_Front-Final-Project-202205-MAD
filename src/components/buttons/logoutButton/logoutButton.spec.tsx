@@ -4,12 +4,6 @@ import { LogoutButton } from './logoutButton';
 import { Provider, useDispatch } from 'react-redux';
 import { store } from '../../../app/store';
 
-// const reducer = {
-//     itemsInSuitcase: [],
-// };
-// const preloadedState = {
-//     itemsInSuitcase: [],
-// };
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
     useDispatch: jest.fn(),

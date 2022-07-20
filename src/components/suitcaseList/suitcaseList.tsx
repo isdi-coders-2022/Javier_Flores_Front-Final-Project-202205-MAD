@@ -1,5 +1,7 @@
+import { SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../../app/store';
+import { deleteItemInSuitcaseAction } from '../../reducers/itemsInSuitcase.reducer/action.creator';
 import { AddListButton } from '../buttons/AddListButton/addListButton';
 import { EraseList } from '../buttons/eraseList/eraseList';
 import { Sum } from '../sum/sum';
@@ -8,23 +10,33 @@ export function SuitcaseList() {
     const dispatch = useDispatch();
     const itemsSaved = useSelector((store: iState) => store.itemsInSuitcase);
 
+    const handleClick = (e: SyntheticEvent) => {
+        const target = e.currentTarget as HTMLButtonElement;
+        const id = target.value;
+        itemsSaved.map((item) => {
+            if (id === item._id) {
+                dispatch(deleteItemInSuitcaseAction(item));
+            }
+        });
+    };
     return (
-        <div className="SuitcaseList">
-            <div className="suitcase__list">
+        <div className="card border-secondary mb-3">
+            <div className="container">
                 <h3>List</h3>
+                <br />
+
                 {itemsSaved.map((item) => (
                     <button
+                        className="btn btn-info btn-sm"
                         key={item._id}
-                        // onClick={handleClick}
+                        onClick={handleClick}
                         value={String(item._id)}
                     >
-                        {item.name} {item.weight}Kg +
+                        {item.name} {item.weight}Kg X
                     </button>
                 ))}
             </div>
-            {/* <DeleteListButton></DeleteListButton> */}
             <AddListButton></AddListButton>
-
             <EraseList></EraseList>
             <Sum></Sum>
         </div>

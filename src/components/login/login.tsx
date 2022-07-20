@@ -56,8 +56,8 @@ export function FormLogin() {
                         onChange={handleChange}
                         required
                     />
-                    <div>
-                        <button className="button__login" type="submit">
+                    <div className="card login">
+                        <button className="btn btn-primary" type="submit">
                             Enter
                         </button>
                         <NewUserButton></NewUserButton>

@@ -25,7 +25,7 @@ export function Register() {
     }
     const template = (
         <>
-            <div className="div__register">
+            <div className="card">
                 <form className="form__register" onSubmit={handleSubmit}>
                     <input
                         className="form-control"
@@ -57,7 +57,7 @@ export function Register() {
                         required
                     />
                     <div className="div__form">
-                        <button className="button__register" type="submit">
+                        <button className="btn btn-primary" type="submit">
                             Create
                         </button>
                     </div>

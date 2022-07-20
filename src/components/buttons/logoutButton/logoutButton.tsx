@@ -16,7 +16,7 @@ export function LogoutButton() {
     }
     return (
         <>
-            <button onClick={handleClick} className="header__button">
+            <button onClick={handleClick} className="btn btn-primary">
                 Logout
             </button>
         </>

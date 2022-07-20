@@ -9,8 +9,8 @@ export function GoToCheckListButton() {
     }
     return (
         <>
-            <button onClick={handleClick} className="logout__button">
-                Go to checklist
+            <button onClick={handleClick} className="btn btn-info">
+                Checklist
             </button>
         </>
     );

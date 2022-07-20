@@ -1,42 +1,45 @@
 import { SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { iState } from '../../app/store';
-import { iSuitcase } from '../../interfaces/interfaces';
 import { modifySuitcaseAction } from '../../reducers/suitcases.reducer/action.creator';
 import { SuitcasesRepository } from '../../services/repository/repository.suitcases';
 
 export function ChooseDestination() {
-    //Do a select with the destinations
     const dispatch = useDispatch();
-    const [destination, setDestination] = useState('');
+    const [destUser, setDestUser] = useState('');
     const userSuitcase = useSelector((store: iState) => store.userSuitcase);
-    async function handleSubmit(ev: SyntheticEvent) {
+    const navigate = useNavigate();
+
+    async function handleChange(ev: SyntheticEvent) {
         ev.preventDefault();
+        const element = ev.target as HTMLFormElement;
+        const desti = element.value;
+        setDestUser((prev) => prev);
 
         const suitcase = await new SuitcasesRepository().updateSuitcase(
-            { destination: destination },
+            { destination: desti },
             userSuitcase._id as string
         );
-        console.log(userSuitcase._id);
         dispatch(modifySuitcaseAction(suitcase));
-    }
-    function handleChange(ev: SyntheticEvent) {
-        const element = ev.target as HTMLFormElement;
-        setDestination(element.value);
+        navigate('/filler');
     }
 
     return (
         <>
-            <div className="ChooseDestination">
-                <label>
+            <div className="input-group mb-3">
+                <label htmlFor="exampleSelect1" className="form-label mt-4">
                     Add Destination
-                    <select value={destination} onChange={handleChange}>
+                    <select
+                        className="form-select"
+                        value={destUser}
+                        onChange={handleChange}
+                    >
                         <option value="beach">Beach</option>
                         <option value="campsite">Campsite</option>
                         <option value="rainy">Rainy</option>
                         <option value="mountain">Mountain</option>
                     </select>
-                    <button onClick={handleSubmit}>Go</button>
                 </label>
             </div>
         </>

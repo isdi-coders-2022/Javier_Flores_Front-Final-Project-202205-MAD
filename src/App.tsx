@@ -1,8 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { ChecklistPage } from './pages/checklistPage';
+import { FillerPage } from './pages/fillerPage';
 import { LoginPage } from './pages/loginPage';
 import { RegisterPage } from './pages/registerPage';
 import { SuitcaseCreator } from './pages/suitcaseCreatorPage';
@@ -24,6 +24,11 @@ function App() {
             path: '/checklist',
             label: 'Checklist',
             page: <ChecklistPage></ChecklistPage>,
+        },
+        {
+            path: '/filler',
+            label: 'Filler',
+            page: <FillerPage></FillerPage>,
         },
     ];
     return (

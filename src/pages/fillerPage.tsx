@@ -1,21 +1,15 @@
 import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../app/store';
+import { HeaderMenu } from '../components/headerMenu/headerMenu';
 import { ItemForm } from '../components/itemForm/ItemForm';
 import { SuitcaseList } from '../components/suitcaseList/suitcaseList';
 import { iItem } from '../interfaces/interfaces';
-import {
-    createItemAction,
-    deleteItemAction,
-    loadItemAction,
-    modifyItemAction,
-} from '../reducers/items.reducer/action.creator';
+import { loadItemAction } from '../reducers/items.reducer/action.creator';
 import { createItemInSuitcaseAction } from '../reducers/itemsInSuitcase.reducer/action.creator';
-import { modifySuitcaseAction } from '../reducers/suitcases.reducer/action.creator';
 import { SuggestionsRepository } from '../services/repository/repository.suggestions';
-import { ChecklistPage } from './checklistPage';
-
-export function Filler() {
+import './fillerPage.css';
+export function FillerPage() {
     const dispatch = useDispatch();
     const suggestions = useSelector((store: iState) => store.suggestions);
     const userDestination = useSelector(
@@ -28,6 +22,8 @@ export function Filler() {
         quantity: 1,
         isChequed: false,
     });
+
+    console.log(suggestions, 'SUGGESTIONS');
 
     const suggests = useMemo(() => new SuggestionsRepository(), []);
     useEffect(() => {
@@ -42,16 +38,17 @@ export function Filler() {
         const addedItem = suggestions.find((x) => x._id === element.value);
         dispatch(createItemInSuitcaseAction(addedItem as iItem));
         element.style.display = 'none'; // hide suggestion when clicked
-        console.log(userSuitcase, 'EEEEEEEEE');
     }
 
     return (
         <>
-            <div className="pool">
-                <div className="pool__suggestions">
+            <HeaderMenu></HeaderMenu>
+            <div className="card border-secondary mb-3">
+                <div className="container">
                     <h3>Suggestions</h3>
                     {suggestions.map((item) => (
                         <button
+                            className="btn btn-primary btn-sm"
                             key={item._id}
                             onClick={handleClick}
                             value={String(item._id)}
