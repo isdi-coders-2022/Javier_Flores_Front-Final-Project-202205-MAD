@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { ItemForm } from './ItemForm';
 import { Provider, useDispatch } from 'react-redux';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { store } from '../../app/store';
 jest.mock('react-redux', () => ({
     ...jest.requireActual('react-redux'),
@@ -22,7 +22,7 @@ describe('Given the component ItemForm', () => {
                     </BrowserRouter>
                 </Provider>
             );
-            expect(screen.getByText(/Add Item/i)).toBeInTheDocument();
+            expect(screen.getByText(/Add/i)).toBeInTheDocument();
         });
     });
     describe('When I send submit', () => {

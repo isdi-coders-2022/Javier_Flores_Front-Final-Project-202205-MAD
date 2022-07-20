@@ -1,42 +1,32 @@
 import { BrowserRouter } from 'react-router-dom';
-import { iState } from '../../app/store';
+import { iState, store } from '../../app/store';
 import { iSuitcase, iUserLogged } from '../../interfaces/interfaces';
 import { itemReducer } from '../../reducers/items.reducer/item.reducer';
 import { itemInSuitcaseReducer } from '../../reducers/itemsInSuitcase.reducer/itemInSuitcase.reducer';
 import { suitcaseReducer } from '../../reducers/suitcases.reducer/suitcase.reducer';
 import { userReducer } from '../../reducers/users.reducer/user.reducer';
-import { render, screen } from '../../utils/test.utils';
 import { CheckList } from './checkList';
-const reducer = {
-    users: userReducer,
-    userSuitcase: suitcaseReducer,
-    items: itemReducer,
-    suggestions: itemReducer,
-    itemsInSuitcase: itemInSuitcaseReducer,
-};
+import { Provider, useDispatch } from 'react-redux';
+import { render, screen } from '@testing-library/react';
 
-const preloadedState: iState = {
-    users: {} as iUserLogged,
-    userSuitcase: {} as iSuitcase,
-    items: [],
-    suggestions: [],
-    itemsInSuitcase: [],
-};
+jest.mock('react-redux', () => ({
+    ...jest.requireActual('react-redux'),
+    useDispatch: jest.fn(),
+}));
 
-describe('Given component CheckList', () => {
+describe('Given component Checklist', () => {
     describe('When component is called', () => {
         test('Then it should render correctly', () => {
-            const { getByText } = render(
-                <BrowserRouter>
-                    <CheckList name="Checklist"></CheckList>
-                </BrowserRouter>,
-                {
-                    preloadedState,
-                    reducer,
-                }
+            const dispatch = jest.fn();
+            (useDispatch as jest.Mock).mockReturnValue(dispatch);
+            render(
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <CheckList />
+                    </BrowserRouter>
+                </Provider>
             );
-            const element = screen.getByText('CheckList');
-            expect('CheckList').toBeInTheDocument();
+            expect(screen.getByText(/Check/i)).toBeInTheDocument();
         });
     });
 });

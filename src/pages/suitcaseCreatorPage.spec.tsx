@@ -1,17 +1,24 @@
-import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { store } from '../app/store';
 import { SuitcaseCreator } from './suitcaseCreatorPage';
 
 describe('Given the component SuitcaseCreator', () => {
     describe('when the component is called', () => {
-        test('then it should be rendered', () => {
+        test('then it should render correctly', async () => {
             render(
-                <MemoryRouter>
-                    <SuitcaseCreator />
-                </MemoryRouter>
+                <Provider store={store}>
+                    <BrowserRouter>
+                        <SuitcaseCreator />
+                    </BrowserRouter>
+                </Provider>
             );
 
-            expect(screen.getByText(/suitcase creator/i)).toBeInTheDocument();
+            const element = screen.getByText(/Limit weight/i);
+            await waitFor(() => {
+                expect(element).toBeInTheDocument();
+            });
         });
     });
 });

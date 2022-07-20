@@ -11,5 +11,9 @@ export function EraseList() {
         dispatch(deleteAllItemInSuitcaseAction());
         console.log(itemsSaved);
     }
-    return <button onClick={handleClick}>Delete</button>;
+    return (
+        <button className="btn btn-outline-dark" onClick={handleClick}>
+            Delete
+        </button>
+    );
 }

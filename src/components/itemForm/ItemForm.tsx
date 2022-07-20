@@ -31,33 +31,34 @@ export function ItemForm() {
         });
     }
     return (
-        <div className="itemForm">
-            <h1>Add Item</h1>
-            <form onSubmit={handleSubmit}>
-                <input
-                    className="input"
-                    type="text"
-                    name="name"
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <input
-                    className="input"
-                    type="number"
-                    name="weight"
-                    placeholder="Weight"
-                    value={formData.weight}
-                    onChange={handleChange}
-                    required
-                />
-                <br />
-                <button className="button__create" type="submit">
-                    Create
-                </button>
-            </form>
+        <div className="card border-secondary mb-3">
+            <div className="form-group">
+                <form onSubmit={handleSubmit}>
+                    <label>Add a new item</label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <label>Write the approximate weight (in Kg)</label>
+                    <input
+                        className="form-control"
+                        type="number"
+                        name="weight"
+                        value={formData.weight}
+                        onChange={handleChange}
+                        required
+                    />
+                    <br />
+                    <button className="btn btn-info" type="submit">
+                        Create
+                    </button>
+                </form>
+            </div>
         </div>
     );
 }

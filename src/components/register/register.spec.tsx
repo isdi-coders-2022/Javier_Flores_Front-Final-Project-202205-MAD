@@ -2,7 +2,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { iUserLogged } from '../../interfaces/interfaces';
 import { userReducer } from '../../reducers/users.reducer/user.reducer';
 import { UsersRepository } from '../../services/repository/repository.users';
-import { fireEvent, render, screen, waitFor } from '../../utils/test.utils';
+import { fireEvent, render, screen } from '../../utils/test.utils';
 import { Register } from './register';
 
 const reducer = {

@@ -20,7 +20,6 @@ export function AddListButton() {
                 isChecked: false,
             };
         });
-        console.log(addQuantityAndCheck, 'Items!!!!!');
         const addListtoSuitcase = await dispatch(
             modifySuitcaseAction({
                 ...userSuitcase,
@@ -36,8 +35,12 @@ export function AddListButton() {
     }
 
     return (
-        <div className="AddListButton">
-            <button onClick={handleClick}>Add</button>
-        </div>
+        <>
+            <br />
+            <br />
+            <button className="btn btn-success" onClick={handleClick}>
+                Add
+            </button>
+        </>
     );
 }

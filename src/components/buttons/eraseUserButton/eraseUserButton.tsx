@@ -12,7 +12,7 @@ export function EraseUserButton() {
             });
     }
     return (
-        <button onClick={handleClick} className="eraseUser__button">
+        <button onClick={handleClick} className="btn btn-dark">
             Erase User
         </button>
     );

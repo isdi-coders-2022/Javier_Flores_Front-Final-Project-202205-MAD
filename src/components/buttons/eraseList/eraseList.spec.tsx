@@ -27,9 +27,7 @@ describe('Given component EraseList', () => {
         test('Then it should render correctly', () => {
             const { getByText } = render(
                 <BrowserRouter>
-                    <EraseList>
-                        <button>Delete</button>
-                    </EraseList>
+                    <EraseList></EraseList>
                 </BrowserRouter>,
                 {
                     preloadedState,

@@ -7,7 +7,7 @@ export function CheckList() {
         (store: iState) => store.itemsInSuitcase
     );
     const quantity = 1;
-    const isChecked = false;
+
     return (
         <>
             <table className="table table-hover">
@@ -30,7 +30,6 @@ export function CheckList() {
                                         type="checkbox"
                                         value=""
                                         id="flexCheckChecked"
-                                        isChecked=""
                                     />
                                 </td>
                             </tr>
