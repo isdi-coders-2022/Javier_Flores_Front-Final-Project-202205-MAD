@@ -54,7 +54,7 @@ export function ItemForm() {
                         required
                     />
                     <br />
-                    <button className="btn btn-info" type="submit">
+                    <button className="btn btn-info btn-lg" type="submit">
                         Create
                     </button>
                 </form>

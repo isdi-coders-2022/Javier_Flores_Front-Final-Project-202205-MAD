@@ -23,13 +23,12 @@ export function FillerPage() {
         isChequed: false,
     });
 
-    console.log(suggestions, 'SUGGESTIONS');
-
     const suggests = useMemo(() => new SuggestionsRepository(), []);
+
     useEffect(() => {
-        suggests
-            .getAllSuggestions(userDestination)
-            .then((suggestions) => dispatch(loadItemAction(suggestions)));
+        suggests.getAllSuggestions(userDestination).then((suggestions) => {
+            dispatch(loadItemAction(suggestions));
+        });
     }, [suggests, dispatch, userDestination]);
 
     function handleClick(ev: SyntheticEvent) {

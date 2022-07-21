@@ -13,7 +13,7 @@ export function Register() {
     async function handleSubmit(ev: SyntheticEvent) {
         ev.preventDefault();
         const registerUser = await new UsersRepository().registerUser(formData);
-        console.log(registerUser);
+
         if (registerUser.name) {
             navigate('/');
         }

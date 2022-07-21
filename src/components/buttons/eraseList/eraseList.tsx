@@ -9,7 +9,6 @@ export function EraseList() {
     function handleClick(ev: SyntheticEvent) {
         ev.preventDefault();
         dispatch(deleteAllItemInSuitcaseAction());
-        console.log(itemsSaved);
     }
     return (
         <button className="btn btn-outline-dark" onClick={handleClick}>

@@ -31,7 +31,6 @@ export function AddListButton() {
                 { items: addQuantityAndCheck as any },
                 userSuitcase._id as string
             );
-        console.log(addItemsToSuitcase);
     }
 
     return (

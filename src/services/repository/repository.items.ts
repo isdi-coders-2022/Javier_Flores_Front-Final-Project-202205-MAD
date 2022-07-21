@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { iItem } from '../../interfaces/interfaces';
 
 export class ItemsRepository {
@@ -31,9 +30,9 @@ export class ItemsRepository {
             body: JSON.stringify(item),
         }).then((response) => response.json());
     }
-    deleteItem(id: iItem['id']) {
-        return fetch(this.url + id, {
-            method: 'DELETE',
-        });
-    }
+    //Method delete not used yet:
+    // deleteItem(id: iItem['id']) {
+    //     return fetch(this.url + id, {
+    //         method: 'DELETE',
+    //     });
 }

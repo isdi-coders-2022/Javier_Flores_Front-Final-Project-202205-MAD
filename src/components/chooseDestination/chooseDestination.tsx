@@ -1,3 +1,4 @@
+import { clearConfigCache } from 'prettier';
 import { SyntheticEvent, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -28,19 +29,17 @@ export function ChooseDestination() {
     return (
         <>
             <div className="input-group mb-3">
-                <label htmlFor="exampleSelect1" className="form-label mt-4">
-                    Add Destination
-                    <select
-                        className="form-select"
-                        value={destUser}
-                        onChange={handleChange}
-                    >
-                        <option value="beach">Beach</option>
-                        <option value="campsite">Campsite</option>
-                        <option value="rainy">Rainy</option>
-                        <option value="mountain">Mountain</option>
-                    </select>
-                </label>
+                <select
+                    className="form-select"
+                    value={destUser}
+                    onChange={handleChange}
+                >
+                    <option>Pick a Destination</option>
+                    <option value="beach">Beach</option>
+                    <option value="campsite">Campsite</option>
+                    <option value="rainy">Rainy</option>
+                    <option value="mountain">Mountain</option>
+                </select>
             </div>
         </>
     );

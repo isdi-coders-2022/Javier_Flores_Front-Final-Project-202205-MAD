@@ -26,6 +26,15 @@ const mockedArray: Array<iUserLogged> = [
     },
 ];
 describe('Given users reducer', () => {
+    describe('When loadUserAction is called', () => {
+        it('Then it should return the payload', () => {
+            const newState = userReducer(
+                {} as iUserLogged,
+                actions.loadUserAction(mockedArray[0])
+            );
+            expect(newState).toEqual(mockedArray[0]);
+        });
+    });
     describe('When calling it with add action with a user', () => {
         test('It should return a new state with an array with that user', () => {
             const newState = userReducer(
