@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export enum actionTypes {
     'suitcase@load' = 'suitcase@load',
     'suitcase@create' = 'suitcase@create',

@@ -21,10 +21,9 @@ export function SuitcaseList() {
     };
     return (
         <div className="card border-secondary mb-3">
+            <h3>List</h3>
+            <br />
             <div className="container">
-                <h3>List</h3>
-                <br />
-
                 {itemsSaved.map((item) => (
                     <button
                         className="btn btn-info btn-sm"

@@ -42,11 +42,11 @@ describe('Given the component Register', () => {
             });
 
             describe('When form is filled and click button login', () => {
-                test('then navigate should be called', () => {
+                test('then repository should be called', () => {
                     UsersRepository.prototype.registerUser = jest
                         .fn()
                         .mockResolvedValue({
-                            name: '',
+                            name: 'ser',
                             user: { test: 'test' },
                         });
                     render(

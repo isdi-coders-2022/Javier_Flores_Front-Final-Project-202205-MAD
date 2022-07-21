@@ -16,7 +16,6 @@ export class UsersRepository {
         }).then((response) => response.json());
     }
     loginUser(user: Partial<iUser>): Promise<iUserLogged> {
-        console.log(user);
         return fetch(this.url + 'login', {
             method: 'POST',
             headers: {

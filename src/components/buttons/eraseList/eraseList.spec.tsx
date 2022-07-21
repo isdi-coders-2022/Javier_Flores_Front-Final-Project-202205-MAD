@@ -38,4 +38,20 @@ describe('Given component EraseList', () => {
             expect(element).toBeInTheDocument();
         });
     });
+    describe('When button delete is clicked', () => {
+        test('Then it should delete all items in suitcase', () => {
+            const { getByText } = render(
+                <BrowserRouter>
+                    <EraseList></EraseList>
+                </BrowserRouter>,
+                {
+                    preloadedState,
+                    reducer,
+                }
+            );
+            const element = screen.getByText('Delete');
+            element.click();
+            expect(element).toBeInTheDocument();
+        });
+    });
 });

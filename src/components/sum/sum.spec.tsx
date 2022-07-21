@@ -4,7 +4,7 @@ import { iState, store } from '../../app/store';
 import { iSuitcase } from '../../interfaces/interfaces';
 import { suitcaseReducer } from '../../reducers/suitcases.reducer/suitcase.reducer';
 import { Sum } from './sum';
-import { fireEvent, render, screen, waitFor } from '../../utils/test.utils';
+import { render, screen, waitFor } from '../../utils/test.utils';
 import { userReducer } from '../../reducers/users.reducer/user.reducer';
 import { itemReducer } from '../../reducers/items.reducer/item.reducer';
 import { itemInSuitcaseReducer } from '../../reducers/itemsInSuitcase.reducer/itemInSuitcase.reducer';
@@ -18,21 +18,28 @@ const reducer = {
 };
 
 const preloadedState: iState = {
-    userSuitcase: {} as iSuitcase,
-    itemsInSuitcase: [],
+    userSuitcase: { limitWeight: 0 } as iSuitcase,
+    itemsInSuitcase: [{ name: '', weight: 1, destination: '' }],
     users: [] as any,
     items: [],
     suggestions: [],
 };
 describe('Given component Sum', () => {
     describe('When component is called', () => {
+        const preloadedState = {
+            userSuitcase: { limitWeight: 0 } as iSuitcase,
+            itemsInSuitcase: [],
+            users: [] as any,
+            items: [],
+            suggestions: [],
+        };
+
         test('Then it should render correctly', () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <Sum />
-                    </BrowserRouter>
-                </Provider>,
+                <BrowserRouter>
+                    <Sum />
+                </BrowserRouter>,
+
                 {
                     preloadedState,
                     reducer,
@@ -40,6 +47,23 @@ describe('Given component Sum', () => {
             );
 
             expect(screen.getByText(/no items/i)).toBeInTheDocument();
+        });
+    });
+    describe('When component is called with items in suitcase', () => {
+        test('Then it should render correctly', async () => {
+            render(
+                <BrowserRouter>
+                    <Sum />
+                </BrowserRouter>,
+                {
+                    preloadedState,
+                    reducer,
+                }
+            );
+
+            await waitFor(() => {
+                expect(screen.getByText(/kg/i)).toBeInTheDocument();
+            });
         });
     });
 });

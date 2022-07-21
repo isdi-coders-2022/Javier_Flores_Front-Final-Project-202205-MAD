@@ -36,18 +36,21 @@ describe('Given items reducer', () => {
             expect(newState).toEqual([mockedArray[0]]);
         });
     });
-    describe('When calling it with update action with a character or partial item', () => {
+    describe('When calling it with update action with a  partial item', () => {
         test('It should return a new state with a updated array of items', () => {
             const newState = itemInSuitcaseReducer(
                 mockedArray,
                 actions.modifyItemInSuitcaseAction({
                     ...mockedArray[0],
                     name: '3',
+                    weight: 3,
+                    destination: '3',
                 })
             );
             expect(newState.find((item) => item.id === '1')?.name).toBe('3');
         });
     });
+
     describe('When calling it with delete action with a item', () => {
         test('It should return a new state with an array of previous items without the deleted one', () => {
             const newState = itemInSuitcaseReducer(

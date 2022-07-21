@@ -21,7 +21,7 @@ export function Sum() {
     }
     return (
         <div className="sum">
-            <div>Total weight: {totalWeight} Kg</div>
+            <div>Total weight: {totalWeight.toFixed(1)} Kg</div>
         </div>
     );
 }

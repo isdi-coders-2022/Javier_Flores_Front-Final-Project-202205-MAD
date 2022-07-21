@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 export enum actionTypes {
     'user@load' = 'user@load',
     'user@create' = 'user@create',

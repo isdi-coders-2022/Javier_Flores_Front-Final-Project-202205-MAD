@@ -4,7 +4,6 @@ import { iState } from '../../app/store';
 import { iSuitcase } from '../../interfaces/interfaces';
 import {
     createSuitcaseAction,
-    loadSuitcaseAction,
     modifySuitcaseAction,
 } from '../../reducers/suitcases.reducer/action.creator';
 import { SuitcasesRepository } from '../../services/repository/repository.suitcases';
@@ -25,7 +24,6 @@ export function WeightSuitcase() {
         const suitcase = await new SuitcasesRepository().addSuitcase(
             newSuitcase
         );
-        console.log(suitcase);
         dispatch(createSuitcaseAction(suitcase));
     }
 
@@ -37,7 +35,6 @@ export function WeightSuitcase() {
                 { limitWeight: formWeight },
                 userSuitcase._id as string
             );
-        console.log(suitcaseWithWeight);
         dispatch(modifySuitcaseAction(suitcaseWithWeight));
     }
 

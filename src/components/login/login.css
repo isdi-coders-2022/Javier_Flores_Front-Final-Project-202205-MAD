@@ -3,3 +3,14 @@
     flex-direction: column;
     align-items: center;
 }
+.card__login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+a {
+    display: flex;
+    justify-content: center;
+    text-decoration-style: none;
+}

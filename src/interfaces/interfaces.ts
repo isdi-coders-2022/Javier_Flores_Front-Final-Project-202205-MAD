@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+/* istanbul ignore file */
 
 export interface iUser {
     id?: string;

@@ -1,4 +1,4 @@
-import { Provider, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { iState, store } from '../app/store';
 import { iSuitcase, iUserLogged } from '../interfaces/interfaces';
@@ -22,8 +22,18 @@ const reducer = {
 
 const preloadedState: iState = {
     users: {} as iUserLogged,
-    userSuitcase: {} as iSuitcase,
-    items: [],
+    userSuitcase: {
+        destination: 'beach',
+    } as iSuitcase,
+    items: [
+        {
+            id: '1',
+            _id: '1',
+            name: 'test',
+            weight: 0,
+            destination: 'test',
+        },
+    ],
     suggestions: [
         {
             id: '1',
@@ -43,11 +53,9 @@ describe('Given the component FillerPage', () => {
     describe('When the component is called', () => {
         test('Then it should render', () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <FillerPage></FillerPage>
-                    </BrowserRouter>
-                </Provider>,
+                <BrowserRouter>
+                    <FillerPage></FillerPage>
+                </BrowserRouter>,
                 { preloadedState, reducer }
             );
             expect(screen.getByText(/suggestions/i)).toBeInTheDocument();
@@ -56,14 +64,14 @@ describe('Given the component FillerPage', () => {
     describe('When clicked item', () => {
         test('Then it should call', async () => {
             render(
-                <Provider store={store}>
-                    <BrowserRouter>
-                        <FillerPage></FillerPage>
-                    </BrowserRouter>
-                </Provider>,
+                <BrowserRouter>
+                    <FillerPage></FillerPage>
+                </BrowserRouter>,
                 { preloadedState, reducer }
             );
-            fireEvent.click(screen.getByText(/kg/i));
+
+            const element = await screen.findByText(/test/i);
+            fireEvent.click(element);
 
             await waitFor(() => {
                 expect(mockDispatch).toHaveBeenCalled();
