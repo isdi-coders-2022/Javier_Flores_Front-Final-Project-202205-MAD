@@ -23,6 +23,7 @@ export const suitcaseReducer = createReducer(initialState, (builder) => {
                 ac.modifySuitcaseAction,
                 (state, action) => (state = action.payload)
             )
+            //Code not implemented yet:
             // .addCase(ac.deleteSuitcaseAction, (state, action) =>
             //     state.filter((Suitcase) => Suitcase.id !== action.payload.id)
             // );

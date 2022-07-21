@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { iState, store } from '../app/store';
+import { iState } from '../app/store';
 import { iSuitcase, iUserLogged } from '../interfaces/interfaces';
 import { itemReducer } from '../reducers/items.reducer/item.reducer';
 import { itemInSuitcaseReducer } from '../reducers/itemsInSuitcase.reducer/itemInSuitcase.reducer';
