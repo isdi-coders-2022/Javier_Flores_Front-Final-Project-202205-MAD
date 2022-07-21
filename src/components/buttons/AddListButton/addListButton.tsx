@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SyntheticEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../../../app/store';
@@ -20,17 +21,17 @@ export function AddListButton() {
                 isChecked: false,
             };
         });
-        const addListtoSuitcase = await dispatch(
+        await dispatch(
             modifySuitcaseAction({
                 ...userSuitcase,
                 items: [addQuantityAndCheck as unknown as iUserItems],
             })
         );
-        const addItemsToSuitcase =
-            await new SuitcasesRepository().updateSuitcase(
-                { items: addQuantityAndCheck as any },
-                userSuitcase._id as string
-            );
+
+        await new SuitcasesRepository().updateSuitcase(
+            { items: addQuantityAndCheck as any },
+            userSuitcase._id as string
+        );
     }
 
     return (

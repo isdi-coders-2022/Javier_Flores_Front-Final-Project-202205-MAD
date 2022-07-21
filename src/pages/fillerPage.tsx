@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { SyntheticEvent, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { iState } from '../app/store';
@@ -8,7 +9,7 @@ import { iItem } from '../interfaces/interfaces';
 import { loadItemAction } from '../reducers/items.reducer/action.creator';
 import { createItemInSuitcaseAction } from '../reducers/itemsInSuitcase.reducer/action.creator';
 import { SuggestionsRepository } from '../services/repository/repository.suggestions';
-import './fillerPage.css';
+
 export function FillerPage() {
     const dispatch = useDispatch();
     const suggestions = useSelector((store: iState) => store.suggestions);
