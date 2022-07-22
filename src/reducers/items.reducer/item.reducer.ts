@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createReducer } from '@reduxjs/toolkit';
 import { iItem } from '../../interfaces/interfaces';
 import * as ac from './action.creator';

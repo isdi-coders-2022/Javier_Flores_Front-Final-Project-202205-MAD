@@ -17,6 +17,12 @@ const mockedArray: Array<iItem> = [
         destination: '2',
     },
 ];
+const mockItem: iItem = {
+    _id: '3',
+    name: 'test',
+    weight: 3,
+    destination: '',
+};
 describe('Given items reducer', () => {
     describe('When calling it with load action with an array of items', () => {
         test('It should return a new state with that array of items', () => {
@@ -36,27 +42,18 @@ describe('Given items reducer', () => {
             expect(newState).toEqual([mockedArray[0]]);
         });
     });
-    describe('When calling it with umodify action with a character or partial item', () => {
+    describe('When calling it with modify action with partial item', () => {
         test('It should return a new state with a updated array of items', () => {
-            const newState = itemReducer(
-                mockedArray,
-                actions.modifyItemAction({
-                    ...mockedArray[0],
-                    name: '3',
-                })
-            );
-            expect(newState.find((item) => item.id === '1')?.name).toBe('3');
+            const initialState = [mockItem];
+            const updatedItem = { ...mockItem, name: 'testing' };
+            const actionToTest = actions.modifyItemAction(updatedItem);
+            const newState = itemReducer(initialState, actionToTest);
+
+            expect(newState).toHaveLength(1);
+
+            expect(newState).toStrictEqual([updatedItem]);
         });
     });
-    // describe('When calling it with modify action without a item', () => {
-    //     test('Then it should return same state', () => {
-    //         const newState = itemReducer(
-    //             mockedArray[0],
-    //             actions.modifyItemAction()
-    //         );
-    //         expect(newState).toEqual(mockedArray[0]);
-    //     });
-    // });
 
     describe('When calling it with delete action with a item', () => {
         test('It should return a new state with an array of previous items without the deleted one', () => {
