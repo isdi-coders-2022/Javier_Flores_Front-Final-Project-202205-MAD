@@ -62,27 +62,43 @@ describe('Given the component FormLogin', () => {
                 expect(mockDispatch).toHaveBeenCalled();
             });
         });
-    });
+        describe('When I log in with a valid email and password', () => {
+            test("Then it should call the UsersRepository's loginUser", async () => {
+                render(
+                    <BrowserRouter>
+                        <FormLogin />
+                    </BrowserRouter>
+                );
 
-    describe('When I change the input text', () => {
-        test('Then it should be changed', async () => {
-            render(
-                <BrowserRouter>
-                    <FormLogin />
-                </BrowserRouter>
-            );
-            const input = screen.getByPlaceholderText(
-                /name/i
-            ) as HTMLFormElement;
+                fireEvent.click(screen.getByText(/Enter/i));
+                await waitFor(() => {
+                    expect(
+                        UsersRepository.prototype.loginUser
+                    ).toHaveBeenCalled();
+                });
+            });
 
-            userEvent.type(input, 'testing login');
+            describe('When I change the input text', () => {
+                test('Then it should be changed', async () => {
+                    render(
+                        <BrowserRouter>
+                            <FormLogin />
+                        </BrowserRouter>
+                    );
+                    const input = screen.getByPlaceholderText(
+                        /name/i
+                    ) as HTMLFormElement;
 
-            const inputAfterTyping = await screen.findByPlaceholderText(
-                /name/i
-            );
+                    userEvent.type(input, 'testing login');
 
-            await waitFor(() => {
-                expect(inputAfterTyping).toHaveValue('testing login');
+                    const inputAfterTyping = await screen.findByPlaceholderText(
+                        /name/i
+                    );
+
+                    await waitFor(() => {
+                        expect(inputAfterTyping).toHaveValue('testing login');
+                    });
+                });
             });
         });
     });

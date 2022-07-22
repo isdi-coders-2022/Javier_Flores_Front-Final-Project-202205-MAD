@@ -1,7 +1,7 @@
 import { SuitcaseList } from './suitcaseList';
 import { useDispatch } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
-import { iState, store } from '../../app/store';
+import { iState } from '../../app/store';
 import { iSuitcase, iUserLogged } from '../../interfaces/interfaces';
 import { userReducer } from '../../reducers/users.reducer/user.reducer';
 import { suitcaseReducer } from '../../reducers/suitcases.reducer/suitcase.reducer';
@@ -26,20 +26,12 @@ const preloadedState: iState = {
     userSuitcase: {
         destination: 'beach',
     } as iSuitcase,
-    items: [
-        {
-            id: '1',
-            _id: '1',
-            name: 'test',
-            weight: 0,
-            destination: 'test',
-        },
-    ],
+    items: [],
     suggestions: [
         {
             id: '1',
             _id: '1',
-            name: 'test',
+            name: '1',
             weight: 0,
             destination: 'test',
         },
@@ -48,7 +40,7 @@ const preloadedState: iState = {
         {
             id: '1',
             _id: '1',
-            name: 'test',
+            name: '1',
             weight: 0,
             destination: 'test',
         },
@@ -81,7 +73,21 @@ describe('Given the component SuitcaseList', () => {
                 </MemoryRouter>,
                 { preloadedState, reducer }
             );
-            const element = await screen.findByText(/test/i);
+            const element = await screen.findByText(/1/i);
+            fireEvent.click(element);
+
+            expect(mockDispatch).toHaveBeenCalled();
+        });
+    });
+    describe("When button value is equal to the item's id", () => {
+        test('Then it should be called the dispatch', async () => {
+            render(
+                <MemoryRouter>
+                    <SuitcaseList></SuitcaseList>
+                </MemoryRouter>,
+                { preloadedState, reducer }
+            );
+            const element = await screen.findByText(/1/i);
             fireEvent.click(element);
 
             expect(mockDispatch).toHaveBeenCalled();
