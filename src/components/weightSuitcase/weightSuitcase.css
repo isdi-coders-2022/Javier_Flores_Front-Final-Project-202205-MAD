@@ -4,3 +4,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.start {
+    width: 15rem;
+}
+
+.save {
+    padding: 1rem;
+    width: 100%;
+}
