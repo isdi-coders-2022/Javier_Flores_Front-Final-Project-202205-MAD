@@ -11,16 +11,20 @@ export function Sum() {
         0
     );
     if (itemsSaved.length === 0) {
-        return <div>No items in suitcase</div>;
+        return (
+            <div className="alert alert-dismissible alert-secondary">
+                No items in suitcase
+            </div>
+        );
     } else if (totalWeight > limitWeight) {
         return (
-            <div className="alert__weight">
-                Total weight: {totalWeight.toFixed(1)} Kg!!!
+            <div className="alert alert-dismissible alert-danger">
+                Total weight: {totalWeight.toFixed(1)} Kg!
             </div>
         );
     }
     return (
-        <div className="sum">
+        <div className="alert alert-dismissible alert-success">
             <div>Total weight: {totalWeight.toFixed(1)} Kg</div>
         </div>
     );

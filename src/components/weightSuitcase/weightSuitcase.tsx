@@ -106,7 +106,7 @@ export function WeightSuitcase() {
                     </svg>
                     <br />
                     <button
-                        className="btn btn-success btn-lg"
+                        className="btn btn-success btn-lg start"
                         onClick={handleSuitcase}
                     >
                         start
@@ -115,9 +115,9 @@ export function WeightSuitcase() {
                 </div>
             </div>
 
-            <div className="form-group">
+            <div className="form-group limitweight">
                 <form onSubmit={handleSubmit}>
-                    <p className="form__input">Limit weight</p>
+                    <p className="form__input">Limit weight:</p>
                     <input
                         className="form-control form-control-lg"
                         placeholder="limit weight"
@@ -128,7 +128,7 @@ export function WeightSuitcase() {
                         onChange={handleChange}
                         required
                     />
-                    <button className="btn btn-secondary" type="submit">
+                    <button className="btn btn-secondary save" type="submit">
                         Save
                     </button>
                 </form>

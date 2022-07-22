@@ -1,5 +1,9 @@
-.alert__weight {
+.alert {
     font-size: 1.5rem;
     font-weight: bold;
-    color: rgb(119, 35, 4);
+}
+
+.alert-danger {
+    font-size: 2rem;
+    color: orangered !important;
 }
